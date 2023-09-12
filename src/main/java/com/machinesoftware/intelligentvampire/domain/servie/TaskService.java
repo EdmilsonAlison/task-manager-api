@@ -34,6 +34,11 @@ public class TaskService {
     }
 
     @Transactional
+    public TaskDTO findById(Integer id) {
+        return mapper.toDto(repository.SEL_BY_ID(id));
+    }
+
+    @Transactional
     public TaskDTO update(Integer id, TaskDTO task) {
         repository.UPDATE_TASK(task.getName(), task.getDescription(), id);
         return task;
@@ -42,6 +47,15 @@ public class TaskService {
     @Transactional
     public void delete(Integer id) {
         repository.DELETE_TASK(id);
+    }
+
+    @Transactional
+    public Boolean completed(Integer id) {
+        if (Boolean.FALSE.equals(existsById(id))) {
+            repository.COMPLETED(id);
+            return true;
+        }
+        return false;
     }
 
 

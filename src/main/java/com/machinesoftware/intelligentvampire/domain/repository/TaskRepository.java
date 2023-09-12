@@ -28,5 +28,13 @@ public interface TaskRepository extends JpaRepository<Task, Integer> {
     @Procedure(name = "DELETE_TASK")
     void DELETE_TASK(@Param("ID") Integer id);
 
+    @Transactional
+    @Procedure(name = "SEL_BY_ID")
+    Task SEL_BY_ID(@Param("ID") Integer id);
+
+    @Transactional
+    @Procedure(name = "COMPLETED")
+    void COMPLETED(Integer id);
+
 
 }

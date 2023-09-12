@@ -43,6 +43,22 @@ public class TaskController {
         return ResponseEntity.ok(task);
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<TaskDTO> findById(@PathVariable Integer id) {
+        if (Boolean.FALSE.equals(service.existsById(id))) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(service.findById(id));
+    }
+
+    @PutMapping("/completed/{id}")
+    public ResponseEntity<TaskDTO> compelted(@PathVariable Integer id) {
+        if (Boolean.FALSE.equals(service.completed(id))) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(service.findById(id));
+    }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable Integer id) {
         if (Boolean.FALSE.equals(service.existsById(id))) {
